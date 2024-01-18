@@ -70,7 +70,6 @@ impl<A: BusAddress> PartialEq for BusRange<A> {
 
 impl<A: BusAddress> Eq for BusRange<A> {}
 
-#[allow(clippy::non_canonical_partial_ord_impl)]
 impl<A: BusAddress> PartialOrd for BusRange<A> {
     fn partial_cmp(&self, other: &BusRange<A>) -> Option<Ordering> {
         self.base.partial_cmp(&other.base)
