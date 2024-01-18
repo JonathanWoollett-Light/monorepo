@@ -1,0 +1,24 @@
+on:
+  push:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    strategy:
+        matrix:
+          include: 
+            - runner: buildjet-8vcpu-ubuntu-2204
+            - runner: buildjet-8vcpu-ubuntu-2204-arm
+            - runner: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
+    steps:
+    - name: Check kvm
+      run: 'lsmod | grep kvm'
+    - name: Check access
+      run: '[ -r /dev/kvm ] && [ -w /dev/kvm ] && echo "OK" || echo "FAIL"'
+    - name: Update permissions
+      run: '[ $(stat -c "%G" /dev/kvm) = kvm ] && sudo usermod -aG kvm ${USER} && echo "Access granted."'
+    - name: Check access
+      run: '[ -r /dev/kvm ] && [ -w /dev/kvm ] && echo "OK" || echo "FAIL"'
