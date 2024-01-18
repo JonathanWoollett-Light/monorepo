@@ -1,0 +1,31 @@
+[package]
+name = "event-manager"
+version = "0.4.0"
+description = "Abstractions for implementing event based systems"
+keywords = ["events"]
+repository = "https://github.com/rust-vmm/event-manager"
+readme = "README.md"
+authors = ["rust-vmm AWS maintainers <rust-vmm-maintainers@amazon.com>"]
+license = "Apache-2.0"
+edition = "2021"
+
+[dependencies]
+libc = "0.2.39"
+vmm-sys-util = { path = "../vmm-sys-util", version = "0.12.1" }
+
+[dev-dependencies]
+criterion = "0.3.5"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[features]
+remote_endpoint = []
+
+[[bench]]
+name = "main"
+harness = false
+
+[lib]
+bench = false # https://bheisler.github.io/criterion.rs/book/faq.html#cargo-bench-gives-unrecognized-option-errors-for-valid-command-line-options

@@ -1,0 +1,19 @@
+[package]
+name = "kvm-bindings"
+version = "0.7.0"
+authors = ["Amazon firecracker team <firecracker-devel@amazon.com>"]
+description = "Rust FFI bindings to KVM generated using bindgen."
+repository = "https://github.com/rust-vmm/kvm-bindings"
+readme = "README.md"
+keywords = ["kvm"]
+license = "Apache-2.0"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[features]
+fam-wrappers = ["vmm-sys-util"]
+
+[dependencies]
+vmm-sys-util = { path = "../vmm-sys-util", version = "0.12.1", optional = true }

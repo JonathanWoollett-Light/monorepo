@@ -1,0 +1,14 @@
+[package]
+name = "vm-allocator"
+version = "0.1.0"
+description = "Helpers for allocating resources needed during the lifetime of a VM."
+repository = "https://github.com/rust-vmm/vm-allocator"
+authors = ["rust-vmm AWS maintainers <rust-vmm-maintainers@amazon.com>"]
+readme = "README.md"
+keywords = ["resources", "allocation", "address", "virt"]
+license = "Apache-2.0"
+edition = "2021"
+
+[dependencies]
+libc = "0.2.39"
+thiserror = "1.0"

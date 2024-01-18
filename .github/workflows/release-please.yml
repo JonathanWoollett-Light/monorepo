@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+      - main
+name: release-please
+jobs:
+  release-please:
+    strategy:
+      matrix:
+        include:
+          - crate: event-manager
+          - crate: kvm-bindings
+          - crate: kvm-ioctls
+          - crate: vfio-bindings
+          - crate: vfio-user
+          - crate: virtio-bindings
+          - crate: virtio-blk
+          - crate: virtio-console
+          - crate: virtio-device
+          - crate: virtio-queue
+          - crate: virtio-queue-ser
+          - crate: virtio-vsock
+          - crate: vm-allocator
+          - crate: vm-device
+          - crate: vm-fdt
+          - crate: vm-memory
+          - crate: vm-superio
+          - crate: vmm-sys-util
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          monorepo-tags: true
+          release-type: rust
+          path: ${{ matrix.crate }}
+          package-name: ${{ matrix.crate }}

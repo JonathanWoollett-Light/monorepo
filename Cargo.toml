@@ -1,0 +1,26 @@
+[workspace]
+members = [
+    "event-manager",
+    "kvm-bindings",
+    "kvm-ioctls",
+    "vfio-bindings",
+    "vfio-user",
+    "virtio-bindings",
+    "virtio-blk",
+    "virtio-console",
+    "virtio-device",
+    "virtio-queue",
+    "virtio-queue-ser",
+    "virtio-vsock",
+    "vm-allocator",
+    "vm-device",
+    "vm-fdt",
+    "vm-memory",
+    "vm-superio",
+    "vmm-sys-util",
+]
+resolver = "2"
+
+[profile.bench]
+lto = true
+codegen-units = 1
