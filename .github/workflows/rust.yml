@@ -6,7 +6,13 @@ env:
 
 jobs:
   rust:
-    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          include: 
+            - runner: buildjet-8vcpu-ubuntu-2204
+            - runner: buildjet-8vcpu-ubuntu-2204-arm
+
+    runs-on: ${{ matrix.runner }}
 
     steps:
     - uses: actions/checkout@v3
