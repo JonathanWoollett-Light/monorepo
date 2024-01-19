@@ -14,11 +14,15 @@ jobs:
             - runner: ubuntu-latest
     runs-on: ${{ matrix.runner }}
     steps:
+    - name: Check system
+      run: cat /proc/cpuinfo && uname -a && ls
     - name: Check kvm
-      run: 'lsmod | grep kvm'
+      run: 'lsmod | grep kvm || echo '
     - name: Check access
       run: '[ -r /dev/kvm ] && [ -w /dev/kvm ] && echo "OK" || echo "FAIL"'
     - name: Update permissions
       run: '[ $(stat -c "%G" /dev/kvm) = kvm ] && sudo usermod -aG kvm ${USER} && echo "Access granted."'
     - name: Check access
       run: '[ -r /dev/kvm ] && [ -w /dev/kvm ] && echo "OK" || echo "FAIL"'
+    - name: Check access
+      run: 'sudo [ -r /dev/kvm ] && [ -w /dev/kvm ] && echo "OK" || echo "FAIL"'
