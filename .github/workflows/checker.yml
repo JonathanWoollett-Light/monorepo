@@ -14,9 +14,12 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v3
-    - uses: taiki-e/cache-cargo-install-action@v1
-      with:
-        tool: aws-ec2
+    
+    - name: Use nightly
+      run: rustup default nightly
+
+    - name: Install aws-ec2
+      run: cargo install aws-ec2
 
     - name: Run
       run: aws-ec2 --size 32 --instance ${{ matrix.instance }} --ami ${{ matrix.ami }} --path ./ --command "sudo ./run1.sh"
