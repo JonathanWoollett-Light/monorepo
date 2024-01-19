@@ -26,10 +26,10 @@ cargo audit
 cargo install cargo-all-features
 
 # Checks build
-cargo check-all-features
+cargo check-all-features --n-chunks 4
     
 # Checks clippy
 cargo clippy --tests -- --deny warnings
 
 # Test
-cargo test-all-features
+cargo test-all-features --n-chunks 4
