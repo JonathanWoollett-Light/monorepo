@@ -98,12 +98,6 @@ fn create_fdt() -> Result<Vec<u8>, Error> {
 }
 ```
 
-### Features
-
-This crate defines a development feature: `long_running_test`. This feature
-SHOULD NOT be used in production as it might enable functionality that is safe
-only for development use cases.
-
 ## License
 
 This project is licensed under either of

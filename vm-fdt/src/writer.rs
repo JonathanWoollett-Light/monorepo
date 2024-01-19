@@ -1001,7 +1001,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(all(feature = "long_running_test", feature = "std"))]
+    #[cfg(feature = "std")]
     fn test_overflow_subtract() {
         let overflow_size = u32::MAX / std::mem::size_of::<FdtReserveEntry>() as u32 - 3;
         let too_large_mem_reserve: Vec<FdtReserveEntry> = (0..overflow_size)

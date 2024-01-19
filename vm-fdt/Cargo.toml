@@ -15,11 +15,3 @@ hashbrown = "0.14"
 default = ["std"]
 std = []
 alloc = []
-# This feature was added as a way to exclude long running tests in development.
-# `cargo test` does not run tests for all features by default. The vm-fdt
-# developer can thus choose to "hide" a long running under this feature.
-# One example of a long running test is the test that checks for overflows
-# caused by large memory allocations.
-#
-# The rust-vmm-ci will still run these tests.
-long_running_test = []
