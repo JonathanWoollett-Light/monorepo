@@ -19,7 +19,7 @@ jobs:
       run: rustup default nightly
 
     - name: Install aws-ec2
-      run: cargo install aws-ec2
+      run: cargo install --git https://github.com/JonathanWoollett-Light/aws-ec2
 
     - name: Run
       run: aws-ec2 --size 32 --instance ${{ matrix.instance }} --ami ${{ matrix.ami }} --path ./
