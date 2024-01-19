@@ -1,28 +1,26 @@
 on:
   push:
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
   rust:
+    runs-on: ubuntu-latest
     strategy:
-        matrix:
-          include: 
-            - runner: buildjet-8vcpu-ubuntu-2204
-            - runner: buildjet-8vcpu-ubuntu-2204-arm
-            - runner: ubuntu-latest
-    runs-on: ${{ matrix.runner }}
+      matrix:
+        include: 
+          - instance: c5.metal
+            ami: ami-0e5f882be1900e43b
+          - instance: c6g.metal
+            ami: ami-00efc25778562c229
+      fail-fast: false
     steps:
-    - name: Check system
-      run: cat /proc/cpuinfo && uname -a && ls
-    - name: Check kvm
-      run: 'lsmod | grep kvm || echo '
-    - name: Check access
-      run: '[ -r /dev/kvm ] && [ -w /dev/kvm ] && echo "OK" || echo "FAIL"'
-    - name: Update permissions
-      run: '[ $(stat -c "%G" /dev/kvm) = kvm ] && sudo usermod -aG kvm ${USER} && echo "Access granted."'
-    - name: Check access
-      run: '[ -r /dev/kvm ] && [ -w /dev/kvm ] && echo "OK" || echo "FAIL"'
-    - name: Check access
-      run: 'sudo [ -r /dev/kvm ] && [ -w /dev/kvm ] && echo "OK" || echo "FAIL"'
+    - uses: actions/checkout@v3
+    - uses: taiki-e/cache-cargo-install-action@v1
+      with:
+        tool: aws-ec2
+
+    - name: Run
+      run: aws-ec2 --size 32 --instance ${{ matrix.instance }} --ami ${{ matrix.ami }} --path ./ --command "sudo ./run1.sh"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: eu-west-2
