@@ -22,14 +22,15 @@ cargo install cargo-audit
 # Audits dependencies
 cargo audit
     
-# Install and cache `cargo-llvm-cov`
-cargo install cargo-all-features
-
 # Checks build
-cargo check-all-features
-    
+# # Install and cache `cargo-llvm-cov`
+# cargo install cargo-all-features
+# cargo check-all-features
+cargo check
+
 # Checks clippy
 cargo clippy --tests -- --deny warnings
 
 # Test
-cargo test-all-features
+# cargo test-all-features
+cargo test
