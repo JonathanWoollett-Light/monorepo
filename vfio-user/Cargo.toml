@@ -24,4 +24,4 @@ vmm-sys-util = { path = "../vmm-sys-util", version = "0.12.1" }
 
 [dev-dependencies]
 argh = "0.1.9"
-env_logger = "0.10.0"
+env_logger = "0.11.3"
